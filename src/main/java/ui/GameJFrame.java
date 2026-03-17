@@ -48,6 +48,12 @@ public class GameJFrame extends JFrame implements KeyListener {
     private void initImage() {
         this.getContentPane().removeAll();
         int x=30,y=30;
+        if(vectory()){
+            JLabel vec = new JLabel(new ImageIcon("./image/win.png"));
+            vec.setBounds(203+x,203+y,197,73);
+            this.getContentPane().add(vec);
+            System.out.println("胜利");
+        }
         for(int i=0;i<4;++i){
             for(int j=0;j<4;++j){
                 JLabel jl = new JLabel(new ImageIcon("./image/animal/animal1/"+data[i][j]+".jpg"));
@@ -60,10 +66,20 @@ public class GameJFrame extends JFrame implements KeyListener {
         backGround.setBounds(39+x,39+y,508,560);
         this.getContentPane().add(backGround);
         this.getContentPane().repaint();
-    }
 
-    private void initData()
-    {
+    }
+    private boolean vectory(){
+        boolean f= true;
+        for(int i=0;i<4;++i){
+            for(int j=0;j<3;++j){
+                if(data[i][j]!=i*4+j+1){
+                    f=false;
+                }
+            }
+        }
+        return f;
+    }
+    private void initData() {
         int[] temp = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
         Random r = new Random();
         for(int i=0;i<16;++i)
@@ -109,6 +125,12 @@ public class GameJFrame extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
+        if(code == 65){
+            initImage();
+        }
+        if(vectory()){
+            return;
+        }
         if(code == 37){
             if(y0+1<=3) {
                 System.out.println("左移");
@@ -141,8 +163,6 @@ public class GameJFrame extends JFrame implements KeyListener {
                 x0 -= 1;
                 initImage();
             }
-        }else if(code == 65){
-            initImage();
         }else if(code==87){
             data = new int[][]{
                     {1,2,3,4},
@@ -150,6 +170,8 @@ public class GameJFrame extends JFrame implements KeyListener {
                     {9,10,11,12},
                     {13,14,15,0}
             };
+            x0=3;
+            y0=3;
             initImage();
         }
     }
