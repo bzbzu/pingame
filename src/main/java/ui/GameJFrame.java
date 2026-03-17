@@ -12,6 +12,7 @@ public class GameJFrame extends JFrame implements KeyListener {
 
     int [][] data = new int[4][4];//图片顺序
     int x0,y0;
+    int count=0;
     public GameJFrame(){
         initJFrame();
         initMenu();
@@ -48,6 +49,9 @@ public class GameJFrame extends JFrame implements KeyListener {
     private void initImage() {
         this.getContentPane().removeAll();
         int x=30,y=30;
+        JLabel stepcount =new JLabel("步数"+count);
+        stepcount.setBounds(50,30,100,20);
+        this.getContentPane().add(stepcount);
         if(vectory()){
             JLabel vec = new JLabel(new ImageIcon("./image/win.png"));
             vec.setBounds(203+x,203+y,197,73);
@@ -112,6 +116,9 @@ public class GameJFrame extends JFrame implements KeyListener {
         if(code==65){
             int x=30,y=30;
             this.getContentPane().removeAll();
+            JLabel stepcount =new JLabel("步数"+count);
+            stepcount.setBounds(50,30,100,20);
+            this.getContentPane().add(stepcount);
             JLabel all = new JLabel(new ImageIcon("./image/animal/animal1/all.jpg"));
             all.setBounds(83+x,134+y,420,420);
             this.getContentPane().add(all);
@@ -137,6 +144,7 @@ public class GameJFrame extends JFrame implements KeyListener {
                 data[x0][y0]=data[x0][y0+1];
                 data[x0][y0+1]=0;
                 y0+=1;
+                count++;
                 initImage();
             }
         }else if(code == 38){
@@ -145,6 +153,7 @@ public class GameJFrame extends JFrame implements KeyListener {
                 data[x0][y0] = data[x0 + 1][y0];
                 data[x0 + 1][y0] = 0;
                 x0 += 1;
+                count++;
                 initImage();
             }
         }else if(code == 39){
@@ -153,6 +162,7 @@ public class GameJFrame extends JFrame implements KeyListener {
                 data[x0][y0]=data[x0][y0-1];
                 data[x0][y0-1]=0;
                 y0-=1;
+                count++;
                 initImage();
             }
         } else if (code == 40) {
@@ -161,6 +171,7 @@ public class GameJFrame extends JFrame implements KeyListener {
                 data[x0][y0] = data[x0 - 1][y0];
                 data[x0 - 1][y0] = 0;
                 x0 -= 1;
+                count++;
                 initImage();
             }
         }else if(code==87){
