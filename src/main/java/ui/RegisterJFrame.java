@@ -6,7 +6,6 @@ public class RegisterJFrame extends JFrame {
 
     public RegisterJFrame(){
         initJFrame();
-
         this.setVisible(true);
     }
 
